@@ -25,14 +25,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Decrypt the response from the server
-	dekryptertMelding := mycrypt.Krypter([]rune(string(buf[:n])), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
-	log.Println("Dekrypter melding: ", string(dekryptertMelding))
-
-	response := string(dekryptertMelding)
-	log.Printf("reply from proxy: %s", response)
-
 	// Encrypt the message and send it back to the server
 	kryptertMelding := mycrypt.Krypter([]rune(os.Args[1]), mycrypt.ALF_SEM03, 4)
 	log.Println("Kryptert melding: ", string(kryptertMelding))
@@ -40,4 +32,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Decrypt the response from the server
+	dekryptertMelding := mycrypt.Krypter([]rune(string(buf[:n])), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+	log.Println("Dekrypter melding: ", string(dekryptertMelding))
+
+	response := string(dekryptertMelding)
+	log.Printf("reply from proxy: %s", response)
+
 }
